@@ -4,14 +4,16 @@ const LocalStrategy = require("passport-local").Strategy;
 
 const User = mongoose.model("user");
 
-// SerializeUser is used to provide some identifying token that can be saved
-// in the users session.  We traditionally use the 'ID' for this.
+/* SerializeUser is used to provide some identifying token that can be saved
+ in the users session.  We traditionally use the 'ID' for this.
+ */
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-// The counterpart of 'serializeUser'.  Given only a user's ID, we must return
-// the user object.  This object is placed on 'req.user'.
+/* The counterpart of 'serializeUser'.  Given only a user's ID, we must return
+ the user object.  This object is placed on 'req.user'.
+ */
 passport.deserializeUser((id, done) => {
   User.findById(id, (err, user) => {
     done(err, user);
@@ -49,13 +51,14 @@ passport.use(
   })
 );
 
-// Creates a new user account.  We first check to see if a user already exists
-// with this email address to avoid making multiple accounts with identical addresses
-// If it does not, we save the existing user.  After the user is created, it is
-// provided to the 'req.logIn' function.  This is apart of Passport JS.
-// Notice the Promise created in the second 'then' statement.  This is done
-// because Passport only supports callbacks, while GraphQL only supports promises
-// for async code!  Awkward!
+/* Creates a new user account.  We first check to see if a user already exists
+ with this email address to avoid making multiple accounts with identical addresses
+ If it does not, we save the existing user.  After the user is created, it is
+ provided to the 'req.logIn' function.  This is apart of Passport JS.
+ Notice the Promise created in the second 'then' statement.  This is done
+ because Passport only supports callbacks, while GraphQL only supports promises
+ for async code!  Awkward!
+ */
 function signup({ email, password, req }) {
   const user = new User({ email, password });
   if (!email || !password) {
