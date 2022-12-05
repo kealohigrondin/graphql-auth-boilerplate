@@ -1,2 +1,2 @@
-# graphql-auth-boilerplate
-Tutorial followed on udemy to build a boilerplate graphql auth service with basic client
+# auth-graphql-starter
+Starter project from a GraphQL course on Udemy.com - Section 3!
