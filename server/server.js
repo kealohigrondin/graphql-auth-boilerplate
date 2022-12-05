@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportConfig = require("./services/auth");
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo");
 const schema = require("./schema/schema");
 const keys = require("./keys");
 
@@ -21,7 +21,7 @@ mongoose.Promise = global.Promise;
 /* Connect to the mongoDB instance and log a message
  on success or failure
 */
-mongoose.connect(MONGO_URI);
+mongoose.connect(MONGO_URI, {useNewUrlParser: true});
 mongoose.connection
   .once("open", () => console.log("Connected to MongoLab instance."))
   .on("error", (error) => console.log("Error connecting to MongoLab:", error));
@@ -37,8 +37,8 @@ app.use(
     resave: true,
     saveUninitialized: true,
     secret: "aaabbbccc",
-    store: new MongoStore({
-      url: MONGO_URI,
+    store: MongoStore.create({
+      mongoUrl: MONGO_URI,
       autoReconnect: true,
     }),
   })
