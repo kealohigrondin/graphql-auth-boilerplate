@@ -1,10 +1,19 @@
 import React from "react";
 import query from "../queries/CurrentUser";
+import { hashHistory } from "react-router";
+import { graphql } from "react-apollo";
 
 class AuthForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { email: "", password: "", messages: [] };
+  }
+
+  componentDidUpdate() {
+    if (this.props.data.user) {
+      //navigate to dashboard whenever a user is logged in or after they log in/sign up
+      hashHistory.push("/dashboard");
+    }
   }
 
   renderMessages() {
@@ -58,4 +67,4 @@ class AuthForm extends React.Component {
     );
   }
 }
-export default AuthForm;
+export default graphql(query)(AuthForm);

@@ -1,5 +1,6 @@
 import React from "react";
 import { Router, hashHistory, Route } from "react-router";
+import Dashboard from "./Dashboard";
 
 import Header from "./Header";
 import Home from "./Home";
@@ -12,8 +13,9 @@ function App() {
       <Header />
       <Router history={hashHistory}>
         <Route path="/" component={Home} />
-        <Route path="/login" component={LoginForm} />
-        <Route path="/signup" component={SignupForm} />
+        <Route path="login" component={LoginForm} />
+        <Route path="signup" component={SignupForm} />
+        <Route path="dashboard" component={Dashboard} />
       </Router>
     </div>
   );
