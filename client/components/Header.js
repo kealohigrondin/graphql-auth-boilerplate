@@ -22,10 +22,10 @@ function Header({ data, mutate }) {
     return (
       <div>
         <li>
-          <a href="/signup">Sign Up</a>
+          <a href="/#/signup">Sign Up</a>
         </li>
         <li>
-          <a href="/login">Log In </a>
+          <a href="/#/login">Log In </a>
         </li>
       </div>
     );
